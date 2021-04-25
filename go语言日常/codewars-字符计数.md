@@ -13,7 +13,41 @@
  ## 我的解答
 
 ```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var s string
+	fmt.Scanf("%s", &s)
+	fmt.Printf("%d",duplicate_count(s))
+}
 func duplicate_count(s1 string) int {
+	var num int
+	b := make([]byte, len(s1))      //只能创建字符切片----遍历数组为字符
+	for i, _:= range s1 {            //遍历数组（转小写）
+		s := s1[i]					 //s--中间变量
+		if 'A' <= s && s <= 'Z' {
+			s = s - 'A' + 'a'
+		}
+		b[i] = s
+	}
+	stat := map[rune]int{}            //go语言 字典
+	for _, ch := range string(b) {
+		if (ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9'){
+			stat[ch]++
+		}
+	}
+	//fmt.Printf("%v",stat)     //测试数据用的
+	for _, v := range stat{
+		if v>1{
+			num++
+		}
+	}
+	return num
+}func duplicate_count(s1 string) int {
   var num int
   b := make([]byte, len(s1))
   //创建切片
